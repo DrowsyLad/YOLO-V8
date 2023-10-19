@@ -33,6 +33,7 @@ class DetectionPredictor(BasePredictor):
             orig_imgs = ops.convert_torch2numpy_batch(orig_imgs)
 
         results = []
-        pred[:, :4] = ops.scale_boxes(img.shape[2:], pred[:, :4], orig_img[0].shape)
-        results.append(Results(orig_img[0], path=self.batch[0][0], names=self.model.names, boxes=pred))
+        pred = []
+        pred[:, :4] = ops.scale_boxes(img.shape[2:], pred[:, :4], orig_imgs[0].shape)
+        results.append(Results(orig_imgs[0], path=self.batch[0][0], names=self.model.names, boxes=pred))
         return results
